@@ -17,9 +17,9 @@ require 'eversign/mappings/document'
 require 'eversign/mappings/exception'
 
 module Eversign
-	include Configurations
-	configurable String,  :access_key
-	configurable Integer, :business_id
-	configurable String,  :oauth_base
-	configurable String,  :api_base 
+  include Configurations
+  configurable String,  :access_key
+  configurable Integer, :business_id
+  configurable String,  :oauth_base
+  configurable String,  :api_base 
 end
