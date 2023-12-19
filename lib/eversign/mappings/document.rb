@@ -1,5 +1,5 @@
-require 'kartograph'
-require_relative '../models/document'
+require "kartograph"
+require_relative "../models/document"
 
 module Eversign
 	module Mappings
@@ -31,7 +31,6 @@ module Eversign
 
 		    property :name, :type, :x, :y, :width, :height, :page, :signer, :identifier, :required, :readonly, :merge, :type,
 		    					:validation_type, :text_style, :text_font, :text_size, :text_color, :value, :options, :group
-		    				
 		  end
 		end
 
@@ -54,7 +53,7 @@ module Eversign
 		    property :document_hash, :template_id, :sandbox, :is_draft, :title, :message, :use_signer_order, :reminders, :require_all_signers,
 		    				  :redirect, :redirect_decline, :client, :expires, :embedded_signing_enabled, :requester_email, :is_template,
 		    				  :is_completed, :is_archived, :is_deleted, :is_trashed, :is_cancelled, :embedded, :in_person, :permission,
-                  :flexible_signing
+                  :use_hidden_tags, :flexible_signing
 		    property :files, plural: true, include: File
 		    property :signers, plural: true, include: Signer
 		    property :recipients, plural: true, include: Recipient
@@ -72,8 +71,8 @@ module Eversign
       def self.extract_single(content, scope)
         obj = super(content, scope)
         data = JSON.parse(content)
-        if data['fields']
-        	data['fields'].each do |field_list|
+        if data["fields"]
+          data["fields"].each do |field_list|
 	      		field_data = []
 			  		field_list.each do |field|
 			  			extracted_field = Field.extract_single(field.to_json, nil)
@@ -85,7 +84,7 @@ module Eversign
         obj
       end
 
-		  def self.representation_for(document)
+      def self.representation_for(document, isFromTemplate = false)
 		  	data = super(nil, document)
 		  	list = []
 		  	if document.fields
@@ -98,7 +97,8 @@ module Eversign
 			  	end
 			  end
 		  	data = JSON.parse(data)
-		  	data['fields'] = list
+        # Fix for issue 7. When we create a document from template (isFromTemplate=true) fields array is 1 dimentional, so we flatten it:
+        data["fields"] = isFromTemplate ? list.flatten : list
 		  	JSON.dump(data)
 		  end
 		end

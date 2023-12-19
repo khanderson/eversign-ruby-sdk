@@ -1,3 +1,4 @@
+.DS_Store
 /.bundle/
 /.yardoc
 /Gemfile.lock
@@ -11,3 +12,7 @@ test.rb
 eversign-*.gem
 *.pdf
 *.jpg
+.vscode/
+vendor/
+.env
+Makefile

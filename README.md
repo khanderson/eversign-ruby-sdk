@@ -1,3 +1,13 @@
+# Not actively maintained
+
+As of June 10th, 2021, Ruby SDK for eversign is no longer actively supported. The reason for this is the lack of community interest in this specific SDK.
+
+Important notes:
+- New community-contributed fixes will be merged and distributed if tests are green.
+- New community-contributed features will be merged and distributed if they include test coverage.
+- On April 6th, 2021, the gem hosted on rubygems.org as been renamed from `eversign` to `eversign-sdk`. Please make sure you switch to the new gem eversign-SDK to get the latest updates and improve visibility on how much this gem is in use.
+- If you are starting with new project/integration with eversign, consider other integration options that we are providing ([PHP SDK](https://github.com/eversign/eversign-php-sdk), [Python SDK](https://github.com/eversign/eversign-python-sdk), [eversign public API](https://eversign.com/api/documentation)).
+
 # Eversign Ruby SDK
 
 Ruby SDK for eversign [API](https://eversign.com/api/documentation)
@@ -7,7 +17,7 @@ Ruby SDK for eversign [API](https://eversign.com/api/documentation)
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'eversign'
+gem 'eversign-sdk'
 ```
 
 And then execute:
@@ -16,7 +26,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install eversign
+    $ gem install eversign-sdk
 
 ## Configuration
 
@@ -48,7 +58,7 @@ Using the following functions required documents on the eversign account associa
 
 #### All
 
-		documents = client.get_all_ocuments()
+		documents = client.get_all_documents()
 		p documents
 
 #### Completed
@@ -127,6 +137,15 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+- Run tests dockerized:
+
+1. `docker build -t ruby-sdk .`
+2. `docker run -it -v $(pwd)/spec:/app/spec ruby-sdk`
+
+- In order to run examples from /examples folder
+
+1. create .env file based on .env-sample
+2. run example like `ruby ./examples/create_document_from_template.rb`
 
 ## Testing
 
@@ -134,7 +153,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 		
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/workatbest/eversign. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/eversign/eversign-ruby-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License

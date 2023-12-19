@@ -4,7 +4,7 @@ module Eversign
 	    attr_accessor :document_hash, :template_id, :sandbox, :is_draft, :title, :message, :use_signer_order, :reminders, :require_all_signers,
 		    				  :redirect, :redirect_decline, :client, :expires, :embedded_signing_enabled, :requester_email, :is_template,
 		    				  :is_completed, :is_archived, :is_deleted, :is_trashed, :is_cancelled, :embedded, :in_person, :permission,
-		    				  :files, :signers, :recipients, :meta, :fields, :flexible_signing
+		    				  :files, :signers, :recipients, :meta, :fields, :use_hidden_tags, :flexible_signing
 
 		  def add_file(file)
 		  	self.files ||= []
@@ -15,9 +15,9 @@ module Eversign
 		  	add_field_list([field])
 		  end
 
-		  def add_field_list(feild_list)
+		  def add_field_list(field_list)
 		  	self.fields ||= []
-		  	self.fields << feild_list
+		  	self.fields << field_list
 		  end
 
 		  def add_recipient(recipient)
